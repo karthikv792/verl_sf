@@ -643,10 +643,11 @@ class RayPPOTrainer:
             if data_source not in data_source_samples:
                 data_source_samples[data_source] = []
             data_source_samples[data_source].append((idx, inp, out, score))
-        
-        with open(os.path.join(self.config.trainer.default_local_dir, f"sample_dict_{self.global_steps}.json"), "w") as f:
+        json_dir = os.path.join(self.config.trainer.default_local_dir, f"results")
+        os.makedirs(json_dir, exist_ok=True)
+        with open(os.path.join(json_dir, f"sample_dict_{self.global_steps}.json"), "w") as f:
             json.dump(data_source_samples, f)
-        with open(os.path.join(self.config.trainer.default_local_dir, f"metric_dict_{self.global_steps}.json"), "w") as f:
+        with open(os.path.join(json_dir, f"metric_dict_{self.global_steps}.json"), "w") as f:
             json.dump(metric_dict, f)
 
         return metric_dict
