@@ -949,8 +949,8 @@ class RayPPOTrainer:
                     self.logger = Tracking(project_name=self.config.trainer.project_name,
                                     experiment_name=self.config.trainer.experiment_name,
                                     default_backend=self.config.trainer.logger,
-                                    config=OmegaConf.to_container(self.config, resolve=True),
-                                    wandb_run_id = self.wandb_run_id)
+                                    config=OmegaConf.to_container(self.config, resolve=True)
+                            )
                 # perform validation before training
                 # currently, we only support validation using the reward_function.
                 if self.val_reward_fn is not None and self.config.trainer.get('val_before_train', True):
