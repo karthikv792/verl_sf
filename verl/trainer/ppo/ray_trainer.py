@@ -954,7 +954,7 @@ class RayPPOTrainer:
                 # load checkpoint before doing anything
                 self._load_checkpoint(self.global_steps)
                 self.wandb_run_id = None
-                if ttt==1:
+                if ttt==0:
                     self.logger = Tracking(project_name=self.config.trainer.project_name,
                                     experiment_name=self.config.trainer.experiment_name,
                                     default_backend=self.config.trainer.logger,
