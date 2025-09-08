@@ -830,6 +830,8 @@ class RayPPOTrainer:
                 xc = os.path.join(working_dir, checkpoint_folder)
             global_step_folder = find_latest_ckpt_path(checkpoint_folder)  # None if no latest
             if step_number is not None:
+                if step_number == 0:
+                    global_step_folder = None
                 import re
                 global_step_folder = re.sub(r"global_step_\d+", f"global_step_{step_number}", global_step_folder)
             print("---------------------------------------------------------")
@@ -944,8 +946,8 @@ class RayPPOTrainer:
             # with open(file_name, mode='w', newline='') as file:
             #     writer = csv.writer(file)
             #     writer.writerow(headers)  # Write the header row
-            for ttt in range(1,7):
-                self.global_steps = int((ttt)*10)
+            for ttt in [0,70,140]:
+                self.global_steps = ttt
                 print("global_steps:",self.global_steps)
 
                 # load checkpoint before doing anything
@@ -962,7 +964,7 @@ class RayPPOTrainer:
                 if self.val_reward_fn is not None and self.config.trainer.get('val_before_train', True):
                     # val_metrics,info = self._validate()
                     val_metrics = self._validate()
-                    self.logger.log(data=val_metrics, step=self.global_steps+3000)
+                    self.logger.log(data=val_metrics, step=self.global_steps)
                     if self.config.trainer.get('val_only', False):
                         pass
                         # with open(file_name, mode='a', newline='') as file:
