@@ -832,8 +832,9 @@ class RayPPOTrainer:
             if step_number is not None:
                 if step_number == 0:
                     global_step_folder = None
-                import re
-                global_step_folder = re.sub(r"global_step_\d+", f"global_step_{step_number}", global_step_folder)
+                else:
+                    import re
+                    global_step_folder = re.sub(r"global_step_\d+", f"global_step_{step_number}", global_step_folder)
             print("---------------------------------------------------------")
             print("global_step_folder:",global_step_folder)
 
