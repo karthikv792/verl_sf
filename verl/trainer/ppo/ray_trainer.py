@@ -947,7 +947,7 @@ class RayPPOTrainer:
             # with open(file_name, mode='w', newline='') as file:
             #     writer = csv.writer(file)
             #     writer.writerow(headers)  # Write the header row
-            for ttt in [0,70,140]:
+            for ttt in [70,140]:
                 self.global_steps = ttt
                 print("global_steps:",self.global_steps)
 
